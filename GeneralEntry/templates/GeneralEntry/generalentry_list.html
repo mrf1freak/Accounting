@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}General Entry{% endblock title %}
+
+{% block content %}
+<h1>General Entry</h1>
+<form action="add" class="w-100 float-right">
+    <input type="submit" value="+ New Entry" class="my-4">
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in object_list %}
+
+        <tr>
+            <td>{{ entry.id }}</td>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.account }}</td>
+            <td>{{ entry.description }}</td>
+            <td>{{ entry.debit }}</td>
+            <td>{{ entry.credit }}</td>
+            <td>{{ entry.balance }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock content %}

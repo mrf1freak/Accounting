@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Products</h1>
+<div class="flex flex-row justify-end mb-4">
+    <a href="add" class="button">+ Add Product</a>
+  </div>
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Product</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for product in object_list %}
+        <tr>
+            <td>
+                {{ product.code }}
+            </td>
+            <td>
+                <a href="/product/{{product.id}}">
+                    {{ product.name }}
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<ul>
+
+</ul>
+{% endblock content %}

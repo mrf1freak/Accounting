@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="app">
+    {% load tailwind_filters %}
+
+    <h1 class="">Login</h1>
+
+    {{ errors }}
+
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Login">
+    </form>
+    
+
+</div>
+
+{% endblock content %}

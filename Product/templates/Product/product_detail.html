@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load tailwind_filters %}
+    <h1 class="">{{object.code}} - {{object.name}}</h1>
+    <a href="/product/{{object.id}}/packing/add" class="button my-4">+ Add Packing</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Packing</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for packing in object.packing_set.all %}
+            <tr>
+                <td>
+                    {{ packing.size }}Kg
+                </td>
+                <td>
+                    <a href="/product/packing/{{packing.id}}">
+                        {{ packing.final_quantity }}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

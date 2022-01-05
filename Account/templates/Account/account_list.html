@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="">Account List</h1>
+<div class="flex flex-row justify-end mb-4">
+  <a href="add" class="button">+ Create Account</a>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">
+        Code
+      </th>
+      <th scope="col">
+        Account
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for account in object_list %}
+    <tr>
+      <td>
+        <div><a href="{{ account.id }}">{{ account.code }}</a></div>
+      </td>
+      <td>
+        <div><a href="{{ account.id }}">{{ account }}</a></div>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+
+{% endblock content%}

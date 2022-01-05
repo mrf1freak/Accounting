@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Add General Entry{% endblock title %}
+{% block content %}
+<div id="app">
+    {% load tailwind_filters %}
+
+    <h1 class="">Add Entry</h1>
+
+    {{ errors }}
+
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Submit">
+    </form>
+    
+
+</div>
+
+{% endblock content %}

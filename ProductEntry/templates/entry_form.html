@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="app">
+    {% load tailwind_filters %}
+
+    <h1 class="">Add Entry</h1>
+
+    {{ errors }}
+
+    <form action="" method="POST" @submit="submit">
+        {% csrf_token %}
+        {{ entryForm | crispy }}
+        <table>
+            <thead class="bg-gray-50">
+                <tr>
+                    <th scope="col">Product
+                    </th>
+                    <th scope="col">Packing (KG)
+                    </th>
+                    <th scope="col">Quantity
+                    </th>
+                    <th scope="col">Total Weight (KG)
+                    </th>
+                    <th scope="col">Price (per KG)
+                    </th>
+                    <th scope="col">Total
+                    </th>
+                    <th scope="col">Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item, index in items">
+                    <td>
+                        <div>{ item.productName }</div>
+                    </td>
+                    <td>
+                        <div>{ item.packingSize }</div>
+                    </td>
+                    <td>
+                        <div>{ item.quantity }</div>
+                    </td>
+                    <td>
+                        <div>{ item.packingSize * item.quantity }Kg</div>
+                    </td>
+                    <td>
+                        <div>Rs. { item.price }</div>
+                    </td>
+                    <td>
+                        <div>Rs. { item.packingSize * item.quantity * item.price}</div>
+                    </td>
+                    <td><input type="button" value="Remove" v-on:click="removeItem(index)"></td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="text" name="items" :value="itemsString" hidden>
+
+        <input type="submit" value="Submit" class="my-4">
+    </form>
+    <table class=" divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col">
+                    Product</th>
+                <th scope="col">
+                    Packing (Kg)</th>
+                <th scope="col">
+                    Quantity</th>
+                <th scope="col">
+                    Price</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <div>{{ entryItemForm.product }}</div>
+                </td>
+                <td>
+                    <div>
+                        <select v-model="packing">
+                            <option v-for="packing in packings" :value="packing.id" v-bind:value="{ id: packing.id, text: packing.size }">{packing.size}</option>
+                        </select>
+                </div>
+                </td>
+                <td>
+                    <div><input type="number" v-model="quantity"></div>
+                </td>
+                <td>
+                    <div><input type="number" v-model="price"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="button" v-on:click="addItem" value="Add"><br>
+
+</div>
+
+<script>
+    var app = new Vue({
+        delimiters: ['{', '}'],
+        el: '#app',
+        data: {
+            product: null,
+            packing: null,
+            quantity: 0,
+            price: 0,
+
+            packings: [],
+            items: []
+        },
+        methods: {
+            addItem: function () {
+                if (this.product == null || this.quantity == null || this.price == 0) return
+
+                this.items.push({
+                    packing: this.packing.id,
+                    quantity: this.quantity,
+                    price: this.price,
+                    product: this.product,
+                    
+                    packingSize: this.packing.text,
+                    productName: document.getElementById("products").options[document.getElementById("products").selectedIndex].text
+
+                })
+            },
+
+            removeItem: function (index) {
+                this.items.splice(index, 1)
+            },
+
+            changeItem: function(e){
+                let pk = e.target.value
+                let that = this
+                
+                fetch(`/product/${pk}/packing`)
+                .then(result => result.json())
+                .then(json => that.packings = json)
+            },
+
+            submit: function (e) {
+                if (this.items.length > 0) return true
+                e.preventDefault()
+            }
+        },
+        computed: {
+            itemsString: function () {
+                return JSON.stringify(this.items)
+            }
+        }
+    })
+</script>
+{% endblock content %}

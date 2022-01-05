@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load tailwind_filters %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+    {{ form|crispy }}
+    <div id="div_id_code" class="mb-3"> <label for="id_amount" class="block text-gray-700 text-sm font-bold mb-2">
+            Opening Amount<span class="asteriskField">*</span> </label> <input type="number" name="amount" maxlength="10"
+            class="textinput focus:outline-none bg-white leading-normal appearance-none block rounded-lg border-gray-300 w-full border py-2 px-4 text-gray-700"
+            required="" id="id_amount"> </div>
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock content%}

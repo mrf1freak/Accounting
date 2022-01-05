@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Product Entry</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Debit</th>
+            <th>Credit</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>{{ object.id }}</td>
+            <td>{{ object.date }}</td>
+            <td>{{ object.account }}</td>
+            <td>{{ object.description }}</td>
+            <td>{{ object.debit }}</td>
+            <td>{{ object.credit }}</td>
+        </tr>
+    </tbody>
+
+</table>
+<br><br>
+<h2>Items</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Packing (KG)</th>
+            <th>Quantity</th>
+            <th>Total Weight (KG)</th>
+            <th>Price (per KG)</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in object.entryitem_set.all %}
+        <tr>
+            <td>{{ item.product }}</td>
+            <td>{{ item.packing.size }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.total_quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock content %}

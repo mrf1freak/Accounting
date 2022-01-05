@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load tailwind_filters %}
+    <h1 class="">{{object.product.code}} - {{object.product.name}} ({{object.size}}Kg)</h1>
+    <a href="/product/{{object.id}}/packing/add" class="button my-4">+ Add Packing</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            {% for entryitem in object.entryitem_set.all %}
+            <tr>
+                <td>
+                    {{ entryitem.entry.date }}
+                </td>
+                <td>
+                    {{ entryitem.entry.account }}
+                </td>
+                <td>
+                    {{ entryitem.entry.type }}
+                </td>
+                <td>
+                    {{ entryitem.quantity }}
+                </td>
+                <td>
+                    {{ entryitem.price }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
