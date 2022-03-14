@@ -1,7 +1,9 @@
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django import forms
+from django.urls import reverse
 from datetime import date
+from django.http import HttpResponseRedirect
 from .models import GeneralEntry
 
 
@@ -22,7 +24,10 @@ class GeneralEntryCreateView(CreateView):
         obj = form.save(commit=False)
         obj.user = self.request.user
         obj.save()        
-        return http.HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('generalentry_list')
 
 
 class GeneralEntryListView(ListView):
