@@ -39,15 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'tailwind',
-    'crispy_forms',
-    'crispy_tailwind',
-    
     'Accounting',
     'Account',
+    'Party',
     'ProductEntry',
     'GeneralEntry',
-    'Product'
+    'Product',
+
+    'tailwind',
+    'crispy_forms',
+    'crispy_tailwind'
+    
+    
 ]
 
 MIDDLEWARE = [

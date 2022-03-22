@@ -4,6 +4,8 @@ from django.views.generic.list import ListView
 from django.views import View
 from django.shortcuts import render, HttpResponse
 
+from Account.models import Account
+
 from .forms import EntryItemForm, EntryForm
 from .models import ProductEntry
 import json
@@ -28,6 +30,7 @@ class EntryItemCreateView(View):
             return render(request, 'entry_form.html', self.context)
 
         form.cleaned_data['user'] = request.user
+        form.cleaned_data['account'] = Account.objects.get_or_create(code='000', defaults={'name': 'SALE'})
         form_instance = form.save()
 
 

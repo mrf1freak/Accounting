@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="">Party List</h1>
+<div class="flex flex-row justify-end mb-4">
+  <a href="add" class="button">+ Create Party</a>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">
+        Code
+      </th>
+      <th scope="col">
+        Account
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for party in object_list %}
+    <tr>
+      <td>
+        <div><a href="{{ party.id }}">{{ party.code }}</a></div>
+      </td>
+      <td>
+        <div><a href="{{ party.id }}">{{ party }}</a></div>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+
+{% endblock content%}

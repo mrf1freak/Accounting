@@ -1,10 +1,10 @@
 from django.db import models
 from itertools import chain
 
-class Account(models.Model):
+class Party(models.Model):
     code = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=80, unique=True)
-    
+    initial_balance = models.IntegerField(default=0, name='Initial Balance')
 
     def __str__(self):
         return self.name

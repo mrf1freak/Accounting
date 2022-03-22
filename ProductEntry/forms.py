@@ -9,7 +9,7 @@ class EntryForm(forms.ModelForm):
         model = ProductEntry
         fields = '__all__'
 
-        exclude = ['user']
+        exclude = ['user', 'account']
 
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date', 'value': date.today()})

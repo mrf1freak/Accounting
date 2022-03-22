@@ -1,6 +1,4 @@
 from django.db import models
-from Product.models import Product
-from Account.models import Account
 from Accounting.models import Entry
 
 class GeneralEntry(Entry):

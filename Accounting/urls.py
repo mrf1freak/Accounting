@@ -25,6 +25,7 @@ urlpatterns = [
     path('product-entry/', include('ProductEntry.urls')),
     path('general-entry/', include('GeneralEntry.urls')),
     path('account/', include('Account.urls')),
+    path('party/', include('Party.urls')),
     path('users/login/', auth_views.LoginView.as_view(redirect_field_name='/')),
     path('users/logout/', auth_views.LogoutView.as_view(next_page='/users/login/')),
     
