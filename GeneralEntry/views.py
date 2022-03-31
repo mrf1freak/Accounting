@@ -23,12 +23,8 @@ class GeneralEntryCreateView(CreateView):
 
 
     def form_valid(self, form):
-        obj = form.save(commit=False)
-        account, _created = Account.objects.get_or_create(code='S00', defaults={'name': 'Sale'})
-        obj.account = account
-        obj.user = self.request.user
-        obj.save()        
-        return HttpResponseRedirect(self.get_success_url())
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('generalentry_list')
