@@ -7,13 +7,7 @@ os.chdir(proj_path)
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
-
-from Account.models import Account
-from GeneralEntry.models import GeneralEntry
-from django.contrib.auth.models import AnonymousUser
-import datetime
-from django.contrib.auth import authenticate, login
-
+from Party.models import Party
 
 os.chdir('scripts')
 
@@ -25,21 +19,5 @@ with open('party.csv') as file:
         print(name, amount, code)
 
 
-        account = Account(code=code, name=name)
-
-        type = ""
-        if amount < 0:
-            type = "Debit"
-        else:
-            type = "Credit"
-
-        user = authenticate(username='nabeel', password='allah123')
-        
-        account.save()
-        if amount != 0:
-            entry = GeneralEntry(description="Initial Balance", amount=amount, user=user, type=type, account=account, date=datetime.datetime.today().strftime("%Y-%m-%d"))
-            entry.save(
-            
-            )
-        # form.save()
-        # entry.save()
+        party = Party(code=code, name=name, initial_balance=amount)
+        party.save()
