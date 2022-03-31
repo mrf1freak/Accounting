@@ -18,6 +18,6 @@ with open('party.csv') as file:
 
         print(name, amount, code)
 
-
-        party = Party(code=code, name=name, initial_balance=amount)
+        party = Party(code=code, name=name)
+        party.initial_balance = amount
         party.save()
